@@ -32,6 +32,7 @@ request.putQuery("user_id", "1234");            //for put query and body for sen
 request.putFile("file1", new File(filepath));   //for send file,   only work with POST and PUT api
 //request.setShowRetrySnack(true);              //Default false - for show Retry Snackbar on No Internet Connection.                
 //request.setShowToast(true);                   //Default true  - for show Toast on Failure, No Internet                            
+request.setShowLog(BuildConfig.DEBUG);          //for show Log of api request and data in build time only
 request.execute(true);                          //for execure the request
 ```
 ## Gradle
