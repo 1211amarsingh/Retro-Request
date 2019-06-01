@@ -19,6 +19,8 @@ import com.kv.retrorequestlib.helper.ResponseDelegate;
 import com.kv.retrorequestlib.helper.ApiServiceInterface;
 import com.kv.retrorequestlib.helper.ApiClient;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -29,6 +31,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.DELETE;
 
 import static com.kv.retrorequestlib.helper.Utils.isOnline;
 import static com.kv.retrorequestlib.helper.Utils.loge;
@@ -38,10 +41,10 @@ import static com.kv.retrorequestlib.helper.Utils.showToast;
 public class RetroRequest extends DataModel {
 
     // Webservice request method types
-    public static final String REQUEST_METHOD_GET = "GET";
-    public static final String REQUEST_METHOD_POST = "POST";
-    public static final String REQUEST_METHOD_PUT = "PUT";
-    public static final String REQUEST_METHOD_DELETE = "DELETE";
+    public static final String GET = "GET";
+    public static final String POST = "POST";
+    public static final String PUT = "PUT";
+    public static final String DELETE = "DELETE";
 
     private Context context;
     private Dialog progressdialog;
@@ -57,41 +60,108 @@ public class RetroRequest extends DataModel {
                 showProgressBar();
             }
             try {
-                Call<String> call = null;
+                Call<String> call;
 
-                ApiServiceInterface apiServiceInterface = ApiClient.create(getBaseUrl());
-
-                switch (getRequestMethod()) {
-                    case REQUEST_METHOD_GET:
-                        call = apiServiceInterface.get(getPath1(), getPath2(), getPath3(), getQuery());
-                        break;
-                    case REQUEST_METHOD_DELETE:
-                        call = apiServiceInterface.delete(getPath1(), getPath2(), getPath3(), getQuery());
-                        break;
-                    case REQUEST_METHOD_POST:
-                        if (getFile() == null) {
-                            call = apiServiceInterface.post(getPath1(), getPath2(), getPath3(), getQuery());
-                        } else {
-                            call = apiServiceInterface.postMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
-                        }
-                        break;
-                    case REQUEST_METHOD_PUT:
-                        if (getFile() == null) {
-                            call = apiServiceInterface.put(getPath1(), getPath2(), getPath3(), getQuery());
-                        } else {
-                            call = apiServiceInterface.putMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
-                        }
-                        break;
+                ApiServiceInterface apiServiceInterface = ApiClient.create(getBaseUrl(), getHeader());
+                if (getPath5() != null && !getPath5().equals("")) {
+                    call = getMethodFor5Part(apiServiceInterface);
+                } else if (getPath4() != null && !getPath4().equals("")) {
+                    call = getMethodFor4Part(apiServiceInterface);
+                } else {
+                    call = getMethodFor3Part(apiServiceInterface);
                 }
                 showLog(call);
 
-                assert call != null;
                 call.enqueue(stringCallback);
             } catch (Exception e) {
                 hideProgressBar();
                 e.printStackTrace();
             }
         }
+    }
+
+    private Call<String> getMethodFor5Part(ApiServiceInterface apiServiceInterface) {
+        Call<String> call = null;
+
+        switch (getRequestMethod()) {
+            case GET:
+                call = apiServiceInterface.get(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
+                break;
+            case DELETE:
+                call = apiServiceInterface.delete(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
+                break;
+            case POST:
+                if (getFile() == null) {
+                    call = apiServiceInterface.post(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
+                } else {
+                    call = apiServiceInterface.postMultiPart(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getBody(), getFile());
+                }
+                break;
+            case PUT:
+                if (getFile() == null) {
+                    call = apiServiceInterface.put(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
+                } else {
+                    call = apiServiceInterface.putMultiPart(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getBody(), getFile());
+                }
+                break;
+        }
+        return call;
+    }
+
+    private Call<String> getMethodFor4Part(ApiServiceInterface apiServiceInterface) {
+        Call<String> call = null;
+
+        switch (getRequestMethod()) {
+            case GET:
+                call = apiServiceInterface.get(getPath1(), getPath2(), getPath3(), getPath4(), getQuery());
+                break;
+            case DELETE:
+                call = apiServiceInterface.delete(getPath1(), getPath2(), getPath3(), getPath4(), getQuery());
+                break;
+            case POST:
+                if (getFile() == null) {
+                    call = apiServiceInterface.post(getPath1(), getPath2(), getPath3(), getPath4(), getQuery());
+                } else {
+                    call = apiServiceInterface.postMultiPart(getPath1(), getPath2(), getPath3(), getPath4(), getBody(), getFile());
+                }
+                break;
+            case PUT:
+                if (getFile() == null) {
+                    call = apiServiceInterface.put(getPath1(), getPath2(), getPath3(), getPath4(), getQuery());
+                } else {
+                    call = apiServiceInterface.putMultiPart(getPath1(), getPath2(), getPath3(), getPath4(), getBody(), getFile());
+                }
+                break;
+        }
+        return call;
+    }
+
+    private Call<String> getMethodFor3Part(ApiServiceInterface apiServiceInterface) {
+        Call<String> call = null;
+
+        switch (getRequestMethod()) {
+            case GET:
+                call = apiServiceInterface.get(getPath1(), getPath2(), getPath3(), getQuery());
+                break;
+            case DELETE:
+                call = apiServiceInterface.delete(getPath1(), getPath2(), getPath3(), getQuery());
+                break;
+            case POST:
+                if (getFile() == null) {
+                    call = apiServiceInterface.post(getPath1(), getPath2(), getPath3(), getQuery());
+                } else {
+                    call = apiServiceInterface.postMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
+                }
+                break;
+            case PUT:
+                if (getFile() == null) {
+                    call = apiServiceInterface.put(getPath1(), getPath2(), getPath3(), getQuery());
+                } else {
+                    call = apiServiceInterface.putMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
+                }
+                break;
+        }
+        return call;
     }
 
     private boolean validater() {
@@ -132,12 +202,12 @@ public class RetroRequest extends DataModel {
 
     private Callback<String> stringCallback = new Callback<String>() {
         @Override
-        public void onResponse(Call<String> s, Response<String> response) {
+        public void onResponse(@NotNull Call<String> s, @NotNull Response<String> response) {
             onSuccessResponse(response);
         }
 
         @Override
-        public void onFailure(Call<String> call, Throwable t) {
+        public void onFailure(@NotNull Call<String> call, Throwable t) {
             hideProgressBar();
             onFailureResponse(0, t.getClass().getName() + " " + t.getMessage());
         }
@@ -179,10 +249,10 @@ public class RetroRequest extends DataModel {
     }
 
     private void showLog(Call<String> call) {
-        if (getQuery() != null) {
+        if (getQuery() != null && !getRequestMethod().equals(GET) && !getRequestMethod().equals(DELETE)) {
             logw("QUERY:- " + getQuery());
         }
-        if (getFile() != null) {
+        if (getFile() != null && !getRequestMethod().equals(GET) && !getRequestMethod().equals(DELETE)) {
             logw("FILES" + getFile());
         }
         logw("URL:- (" + getRequestMethod() + ") " + call.request().url().toString());

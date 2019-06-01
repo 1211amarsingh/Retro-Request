@@ -27,17 +27,16 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
 //        request.setShowToast(false);
 //        request.execute(true);                for execute the api request
 
-
     private void serverRequestForGetData() {
         RetroRequest request = new RetroRequest(context, this);
         request.setBaseUrl(getBaseUrl());   //set base_url of api example- "https://github.com/",  "https://github.com:1030/"
         request.setPath1("v1.0");      //set path
         request.setPath2("swiggy");
         request.setPath3("blob");
-        request.setPath4("master");
-        request.setPath5("README.md");
-
-        request.setRequestMethod(RetroRequest.REQUEST_METHOD_GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
+        request.setPath4("master");                                      // optional if required
+        request.setPath5("README.md");                                   // optional if required
+        request.addHeader("Authorization", "JWT eyJhb");    // optional if required
+        request.setRequestMethod(RetroRequest.GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
         request.setTag(ResponseType.SIGNUP);    //for use multiple request in same activity  set unique tag
         request.setShowRetrySnack(true);        //for show Retry Snackbar on No Internet Connection.                Default false
         request.setShowToast(true);             //for show Toast on Failure, No Internet                            Default true
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
 //        request.putFile("file1", new File(filepath));   //for send file,   only work with POST and PUT type
         request.execute(true);          //for execure the request
     }
-
 
     @Override
     public void onSuccess(int tag, String response) {

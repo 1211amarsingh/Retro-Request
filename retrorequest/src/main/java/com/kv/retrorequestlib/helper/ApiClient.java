@@ -3,8 +3,11 @@
  */
 package com.kv.retrorequestlib.helper;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
@@ -12,7 +15,7 @@ import retrofit2.Retrofit;
 
 public class ApiClient {
 
-    public static <S> S create(String baseUrl) {
+    public static <S> S create(String baseUrl, HashMap<String, String> header) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -23,7 +26,7 @@ public class ApiClient {
         httpClient.interceptors().add(chain -> {
             Request original = chain.request();
             Request.Builder builder = original.newBuilder();
-//            builder.header("Authorization", getJwtToken(context));
+            addHeaders(header, builder);
             Request request = builder.method(original.method(), original.body()).build();
             return chain.proceed(request);
         });
@@ -34,5 +37,13 @@ public class ApiClient {
                 .baseUrl(baseUrl)
                 .build();
         return retrofit.create((Class<S>) ApiServiceInterface.class);
+    }
+
+    private static void addHeaders(HashMap<String, String> header, Request.Builder builder) {
+        if (header != null) {
+            for (Map.Entry<String, String> hash : header.entrySet()) {
+                builder.header(hash.getKey(), hash.getValue());
+            }
+        }
     }
 }

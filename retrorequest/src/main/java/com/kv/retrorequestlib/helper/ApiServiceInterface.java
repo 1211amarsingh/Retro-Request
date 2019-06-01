@@ -2,6 +2,7 @@ package com.kv.retrorequestlib.helper;
 /**
  * updated on 1/4/19.
  */
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,4 +44,52 @@ public interface ApiServiceInterface {
     @Multipart
     @PUT("{path1}/{path2}/{path3}")
     Call<String> putMultiPart(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> files);
+
+// four path----------------------------------------------------------------------------------------------
+
+    @GET("{path1}/{path2}/{path3}/{path4}")
+    Call<String> get(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @QueryMap(encoded = true) Map<String, String> query);
+
+    @DELETE("{path1}/{path2}/{path3}/{path4}")
+    Call<String> delete(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @QueryMap(encoded = true) Map<String, String> query);
+
+    @FormUrlEncoded
+    @POST("{path1}/{path2}/{path3}/{path4}")
+    Call<String> post(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @FieldMap(encoded = true) Map<String, String> body);
+
+    @FormUrlEncoded
+    @PUT("{path1}/{path2}/{path3}/{path4}")
+    Call<String> put(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @FieldMap(encoded = true) Map<String, String> body);
+
+    @Multipart
+    @POST("{path1}/{path2}/{path3}/{path4}")
+    Call<String> postMultiPart(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> files);
+
+    @Multipart
+    @PUT("{path1}/{path2}/{path3}/{path4}")
+    Call<String> putMultiPart(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> files);
+
+    // five path----------------------------------------------------------------------------------------------
+
+    @GET("{path1}/{path2}/{path3}/{path4}/{path5}")
+    Call<String> get(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @Path("path5") String path5, @QueryMap(encoded = true) Map<String, String> query);
+
+    @DELETE("{path1}/{path2}/{path3}/{path4}/{path5}")
+    Call<String> delete(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @Path("path5") String path5, @QueryMap(encoded = true) Map<String, String> query);
+
+    @FormUrlEncoded
+    @POST("{path1}/{path2}/{path3}/{path4}/{path5}")
+    Call<String> post(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @Path("path5") String path5, @FieldMap(encoded = true) Map<String, String> body);
+
+    @FormUrlEncoded
+    @PUT("{path1}/{path2}/{path3}/{path4}/{path5}")
+    Call<String> put(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @Path("path5") String path5, @FieldMap(encoded = true) Map<String, String> body);
+
+    @Multipart
+    @POST("{path1}/{path2}/{path3}/{path4}/{path5}")
+    Call<String> postMultiPart(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @Path("path5") String path5, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> files);
+
+    @Multipart
+    @PUT("{path1}/{path2}/{path3}/{path4}/{path5}")
+    Call<String> putMultiPart(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @Path("path5") String path5, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> files);
 }
