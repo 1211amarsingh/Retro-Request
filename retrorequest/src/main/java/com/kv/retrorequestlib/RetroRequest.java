@@ -63,7 +63,7 @@ public class RetroRequest extends DataModel {
                 Call<String> call;
 
                 ApiServiceInterface apiServiceInterface = ApiClient.create(getBaseUrl(), getHeader());
-                if (getPath5() != null && !getPath5().equals("")) {
+                if (getPath5() != null && !getPath5().equals("") && getPath4() != null && !getPath4().equals("")) {
                     call = getMethodFor5Part(apiServiceInterface);
                 } else if (getPath4() != null && !getPath4().equals("")) {
                     call = getMethodFor4Part(apiServiceInterface);
