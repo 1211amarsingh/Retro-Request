@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
         request.setTag(ResponseType.SIGNUP);    //for use multiple request in same activity  set unique tag
         request.setShowRetrySnack(true);        //for show Retry Snackbar on No Internet Connection.                Default false
         request.setShowToast(true);             //for show Toast on Failure, No Internet                            Default true
+        request.setShowLog(BuildConfig.DEBUG);               //for show Log of api request and data
         request.putQuery("user_id", "1234");    //for put query and body for send data use as key value pair -> &user_id=1234
 //        request.putFile("file1", new File(filepath));   //for send file,   only work with POST and PUT type
         request.execute(true);          //for execure the request

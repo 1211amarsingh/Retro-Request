@@ -8,10 +8,9 @@ import android.widget.Toast;
 
 import com.kv.retrorequestlib.BuildConfig;
 
-
 public class Utils {
     private static final String TAG = "Retro Request : ";
-    private static final boolean DEVELOPER_MODE = BuildConfig.DEBUG;
+    private static final boolean DEVELOPER_MODE = DataModel.isShowLog();
 
     public static boolean isOnline(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
