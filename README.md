@@ -1,0 +1,2 @@
+# Retro-Request
+Retro Request library is based on Retrofit Library useful for make the http calls. This library (Retro Request) is easy to use compare to Retrofit just you have to put the parameter. Retrofit is denitely the better alternative to volley in terms of ease of use, performance, extensibility and other things.  It is a type safe REST client for Android built by Square.  Using this tool android developer can make all network stuff much more easier. 
