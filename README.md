@@ -23,8 +23,9 @@ request.setBaseUrl(getBaseUrl());     //set base_url of api  example- "https://g
 request.setPath1("v1.0");             //set path
 request.setPath2("swiggy");
 request.setPath3("blob");
-request.setPath4("master");
-request.setPath5("README.md");
+request.setPath4("master");					// optional
+request.setPath5("README.md");					// optional
+request.addHeader("Authorization", "JWT eyJhb");		// optional
 
 request.setRequestMethod(RetroRequest.REQUEST_METHOD_GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
 request.setTag(ResponseType.SIGNUP);            //for use multiple request in same activity  set unique tag
