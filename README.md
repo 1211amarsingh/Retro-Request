@@ -23,8 +23,9 @@ request.setBaseUrl(getBaseUrl());     //set base_url of api  example- "https://g
 request.setPath1("v1.0");             //set path
 request.setPath2("swiggy");
 request.setPath3("blob");
-request.setPath4("master");
-request.setPath5("README.md");
+request.setPath4("master");					// optional
+request.setPath5("README.md");					// optional
+request.addHeader("Authorization", "JWT eyJhb");		// optional
 
 request.setRequestMethod(RetroRequest.REQUEST_METHOD_GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
 request.setTag(ResponseType.SIGNUP);            //for use multiple request in same activity  set unique tag
@@ -32,6 +33,7 @@ request.putQuery("user_id", "1234");            //for put query and body for sen
 request.putFile("file1", new File(filepath));   //for send file,   only work with POST and PUT api
 //request.setShowRetrySnack(true);              //Default false - for show Retry Snackbar on No Internet Connection.                
 //request.setShowToast(true);                   //Default true  - for show Toast on Failure, No Internet                            
+request.setShowLog(BuildConfig.DEBUG);          //for show Log of api request and data in build time only
 request.execute(true);                          //for execure the request
 ```
 ## Gradle
