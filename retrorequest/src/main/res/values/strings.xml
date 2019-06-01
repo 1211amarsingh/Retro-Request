@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Retro Request</string>
+    <string name="check_your_internet">Please check your internet connection.</string>
+</resources>
