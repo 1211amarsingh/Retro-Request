@@ -16,8 +16,8 @@ import android.view.WindowManager;
 import com.kv.retrorequestlib.helper.DataModel;
 import com.kv.retrorequestlib.helper.RequestBodyUtils;
 import com.kv.retrorequestlib.helper.ResponseDelegate;
-import com.kv.retrorequestlib.helper.RetroDataService;
-import com.kv.retrorequestlib.helper.ServiceGenerator;
+import com.kv.retrorequestlib.helper.ApiServiceInterface;
+import com.kv.retrorequestlib.helper.ApiClient;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -59,32 +59,29 @@ public class RetroRequest extends DataModel {
             try {
                 Call<String> call = null;
 
-                RetroDataService retroDataService = ServiceGenerator.createService(getBaseUrl());
+                ApiServiceInterface apiServiceInterface = ApiClient.create(getBaseUrl());
 
-                if (getFile() == null) {
-                    switch (getRequestMethod()) {
-                        case REQUEST_METHOD_GET:
-                            call = retroDataService.dataRequestGet(getPath1(), getPath2(), getPath3(), getQuery());
-                            break;
-                        case REQUEST_METHOD_DELETE:
-                            call = retroDataService.dataRequestDelete(getPath1(), getPath2(), getPath3(), getQuery());
-                            break;
-                        case REQUEST_METHOD_POST:
-                            call = retroDataService.dataRequestPost(getPath1(), getPath2(), getPath3(), getQuery());
-                            break;
-                        case REQUEST_METHOD_PUT:
-                            call = retroDataService.dataRequestPut(getPath1(), getPath2(), getPath3(), getQuery());
-                            break;
-                    }
-                } else {
-                    switch (getRequestMethod()) {
-                        case REQUEST_METHOD_POST:
-                            call = retroDataService.dataRequestPostMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
-                            break;
-                        case REQUEST_METHOD_PUT:
-                            call = retroDataService.dataRequestPutMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
-                            break;
-                    }
+                switch (getRequestMethod()) {
+                    case REQUEST_METHOD_GET:
+                        call = apiServiceInterface.get(getPath1(), getPath2(), getPath3(), getQuery());
+                        break;
+                    case REQUEST_METHOD_DELETE:
+                        call = apiServiceInterface.delete(getPath1(), getPath2(), getPath3(), getQuery());
+                        break;
+                    case REQUEST_METHOD_POST:
+                        if (getFile() == null) {
+                            call = apiServiceInterface.post(getPath1(), getPath2(), getPath3(), getQuery());
+                        } else {
+                            call = apiServiceInterface.postMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
+                        }
+                        break;
+                    case REQUEST_METHOD_PUT:
+                        if (getFile() == null) {
+                            call = apiServiceInterface.put(getPath1(), getPath2(), getPath3(), getQuery());
+                        } else {
+                            call = apiServiceInterface.putMultiPart(getPath1(), getPath2(), getPath3(), getBody(), getFile());
+                        }
+                        break;
                 }
                 showLog(call);
 

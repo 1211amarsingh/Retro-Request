@@ -33,7 +33,6 @@ public class Utils {
     }
 
     public static void loge(String message) {
-        if (DEVELOPER_MODE)
             try {
                 Log.e(TAG, message);
             } catch (Exception ignore) {

@@ -16,6 +16,6 @@ public class Config {
         } else if (env.equalsIgnoreCase("live")) {
             url = "http://www.kvinfotech.com:3000";
         }
-        return "http://shubhbuild.com:3000/";
+        return url;
     }
 }

@@ -10,9 +10,9 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 
 
-public class ServiceGenerator {
+public class ApiClient {
 
-    public static <S> S createService(String baseUrl) {
+    public static <S> S create(String baseUrl) {
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
@@ -33,7 +33,6 @@ public class ServiceGenerator {
                 .client(httpClient.build())
                 .baseUrl(baseUrl)
                 .build();
-
-        return retrofit.create((Class<S>) RetroDataService.class);
+        return retrofit.create((Class<S>) ApiServiceInterface.class);
     }
 }
