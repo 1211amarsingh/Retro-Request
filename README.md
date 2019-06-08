@@ -69,17 +69,6 @@ Latest Version : [![](https://jitpack.io/v/1211amarsingh/retro-request.svg)](htt
 
 <a href="https://www.linkedin.com/in/pramit-chaturvedi-02064147/">Pramit Chaturvedi</a> And Team</b><br>
     
-<b> ▷ Other Apps: </b>
-* <a href="https://play.google.com/store/apps/details?id=com.kv.swiggyaddresspick">Swiggy Address Pick</a>
-* <a href="https://play.google.com/store/apps/details?id=com.kv.callrecorder">Call Recorder Free</a>
-* <a href="https://play.google.com/store/apps/details?id=com.kv.popupimageviews1">Popup Image View</a>
-          
-<b>▷ Library:</b>
-
-- <a href="https://github.com/1211amarsingh/swiggy">Swiggy Address Pick</a>
-- <a href="https://github.com/1211amarsingh/PopupImageView">Popup Image View</a>
-
-
 ---------------------------------------------------------
 We're always excited to hear from you! If you have any request, suggestions, feedback, questions, or concerns, please email us at:
 
