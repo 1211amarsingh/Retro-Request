@@ -6,9 +6,11 @@ package com.kv.retrorequestlib;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,6 +23,7 @@ import com.kv.retrorequestlib.helper.ApiClient;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -33,6 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.DELETE;
 
+import static com.kv.retrorequestlib.helper.Utils.getBuildConfigValue;
 import static com.kv.retrorequestlib.helper.Utils.isOnline;
 import static com.kv.retrorequestlib.helper.Utils.loge;
 import static com.kv.retrorequestlib.helper.Utils.logw;
@@ -52,6 +56,8 @@ public class RetroRequest extends DataModel {
     public RetroRequest(Context context, ResponseDelegate delegate) {
         super(delegate);
         this.context = context;
+        setShowLog((Boolean) getBuildConfigValue(context, "DEBUG"));
+        Log.w("DEBUG MODE", isShowLog() + "");
     }
 
     public void execute(boolean progressbar) {
@@ -63,9 +69,8 @@ public class RetroRequest extends DataModel {
                 Call<String> call;
 
                 ApiServiceInterface apiServiceInterface = ApiClient.create(getBaseUrl(), getHeader());
-                if (getPath5() != null && !getPath5().equals("") && getPath4() != null && !getPath4().equals("")) {
-                    call = getMethodFor5Part(apiServiceInterface);
-                } else if (getPath4() != null && !getPath4().equals("")) {
+
+                if (getPath4() != null && !getPath4().equals("")) {
                     call = getMethodFor4Part(apiServiceInterface);
                 } else {
                     call = getMethodFor3Part(apiServiceInterface);
@@ -78,34 +83,6 @@ public class RetroRequest extends DataModel {
                 e.printStackTrace();
             }
         }
-    }
-
-    private Call<String> getMethodFor5Part(ApiServiceInterface apiServiceInterface) {
-        Call<String> call = null;
-
-        switch (getRequestMethod()) {
-            case GET:
-                call = apiServiceInterface.get(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
-                break;
-            case DELETE:
-                call = apiServiceInterface.delete(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
-                break;
-            case POST:
-                if (getFile() == null) {
-                    call = apiServiceInterface.post(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
-                } else {
-                    call = apiServiceInterface.postMultiPart(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getBody(), getFile());
-                }
-                break;
-            case PUT:
-                if (getFile() == null) {
-                    call = apiServiceInterface.put(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getQuery());
-                } else {
-                    call = apiServiceInterface.putMultiPart(getPath1(), getPath2(), getPath3(), getPath4(), getPath5(), getBody(), getFile());
-                }
-                break;
-        }
-        return call;
     }
 
     private Call<String> getMethodFor4Part(ApiServiceInterface apiServiceInterface) {

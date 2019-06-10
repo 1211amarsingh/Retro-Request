@@ -8,7 +8,7 @@ public class Config {
         String url = "http://192.168.43.43:3000/";
 
         if (env.equalsIgnoreCase("dev")) {
-            url = "http://192.168.43.43:3000/";
+            url = "http://postalpincode.in/";
         } else if (env.equalsIgnoreCase("qa")) {
             url = "http://192.168.43.43:3001/";
         } else if (env.equalsIgnoreCase("uat")) {
