@@ -41,14 +41,13 @@ request.execute(true);                          //for execure the request
 
     allprojects {
 		repositories {
-			...
 			maven { url 'https://jitpack.io' }
 		}
 	}
 **Step 2.** Add the dependency
     
     dependencies {
-	        implementation 'com.github.1211amarsingh:Retro-Request:Tag'
+	        implementation 'com.github.1211amarsingh:Retro-Request:1.5'
 	}
   
 **Step 3.** Add Compile Options in app. gradle
