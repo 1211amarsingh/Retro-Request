@@ -27,8 +27,8 @@ request.setPath3("110001");
 request.setPath4("");					// optional
 request.addHeader("Authorization", "JWT eyJhb");		// optional
 
-request.setRequestMethod(RetroRequest.REQUEST_METHOD_GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
-request.setTag(ResponseType.SIGNUP);            //for use multiple request in same activity  set unique tag
+request.setRequestMethod(RetroRequest.GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
+request.setTag(ResponseType.SIGNUP);            //for use multiple request in same activity  set unique tag {create constant for tag}
 request.putQuery("user_id", "1234");            //for put query and body for send data use as key value pair -> &user_id=1234
 request.putFile("file1", new File(filepath));   //for send file,   only work with POST and PUT api
 //request.setShowRetrySnack(true);              //Default false - for show Retry Snackbar on No Internet Connection.                
