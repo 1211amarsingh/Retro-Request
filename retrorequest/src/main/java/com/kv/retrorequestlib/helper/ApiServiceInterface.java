@@ -9,6 +9,7 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -56,6 +57,10 @@ public interface ApiServiceInterface {
     @FormUrlEncoded
     @POST("{path1}/{path2}/{path3}/{path4}")
     Call<String> post(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4, @FieldMap(encoded = true) Map<String, String> body);
+
+    @POST("{path1}/{path2}/{path3}/{path4}")
+    Call<String> postBody(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @Path("path4") String path4,
+                              @Body Object object);
 
     @FormUrlEncoded
     @PUT("{path1}/{path2}/{path3}/{path4}")

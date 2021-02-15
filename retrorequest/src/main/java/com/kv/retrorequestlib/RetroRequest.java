@@ -6,7 +6,6 @@ package com.kv.retrorequestlib;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
@@ -15,15 +14,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.kv.retrorequestlib.helper.ApiClient;
+import com.kv.retrorequestlib.helper.ApiServiceInterface;
 import com.kv.retrorequestlib.helper.DataModel;
 import com.kv.retrorequestlib.helper.RequestBodyUtils;
 import com.kv.retrorequestlib.helper.ResponseDelegate;
-import com.kv.retrorequestlib.helper.ApiServiceInterface;
-import com.kv.retrorequestlib.helper.ApiClient;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -34,7 +32,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.DELETE;
 
 import static com.kv.retrorequestlib.helper.Utils.getBuildConfigValue;
 import static com.kv.retrorequestlib.helper.Utils.isOnline;
@@ -96,8 +93,10 @@ public class RetroRequest extends DataModel {
                 call = apiServiceInterface.delete(getPath1(), getPath2(), getPath3(), getPath4(), getQuery());
                 break;
             case POST:
-                if (getFile() == null) {
+                if (getFile() == null && getObject() == null) {
                     call = apiServiceInterface.post(getPath1(), getPath2(), getPath3(), getPath4(), getQuery());
+                } else if (getObject() != null) {
+                    call = apiServiceInterface.postBody(getPath1(), getPath2(), getPath3(), getPath4(), getObject());
                 } else {
                     call = apiServiceInterface.postMultiPart(getPath1(), getPath2(), getPath3(), getPath4(), getBody(), getFile());
                 }

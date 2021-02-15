@@ -1,8 +1,8 @@
 package com.kv.sample;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
         request.setPath2("pincode");
         request.setPath3(pin);
 //        request.setPath4("master");                                      // optional if required
-
+//        Model model = new Model();
+//        model.breakInFlag = "All";
+//
+//        request.setObject(model);
         request.putQuery("user_id", "1234");    //for put query and body for send data use as key value pair -> &user_id=1234
         request.addHeader("Authorization", "JWT eyJhb");    // optional if required
         request.setRequestMethod(RetroRequest.GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
