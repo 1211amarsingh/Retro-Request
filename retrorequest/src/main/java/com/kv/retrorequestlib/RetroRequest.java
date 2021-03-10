@@ -193,9 +193,9 @@ public class RetroRequest extends DataModel {
         hideProgressBar();
 
         try {
-            if (response.code() == 200 && getResponseDelegate() != null) {
+            if (response.code() >= 200 && response.code() <= 299 && getResponseDelegate() != null) {
                 logw("Response:- " + response.body());
-                getResponseDelegate().onSuccess(getTag(), response.body());
+                getResponseDelegate().onSuccess(getTag(), response.code(), response.body());
             } else {
                 onFailureResponse(response.code(), response.message() + "\n" + response.errorBody().string());
             }
