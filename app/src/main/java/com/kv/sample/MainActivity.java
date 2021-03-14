@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
     }
 
     @Override
-    public void onSuccess(int tag, String response) {
+    public void onSuccess(int tag,int code, String response) {
         if (tag == PINCODE) {
             PostOffice postOffice = new Gson().fromJson(response, PostOffice.class);
             if (postOffice.getStatus().equals("Success")) {

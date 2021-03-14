@@ -24,6 +24,30 @@ import retrofit2.http.QueryMap;
 
 public interface ApiServiceInterface {
 
+    // two path----------------------------------------------------------------------------------------------
+    @GET("{path1}/{path2}")
+    Call<String> get(@Path("path1") String path1, @Path("path2") String path2, @QueryMap(encoded = true) Map<String, String> query);
+
+    @DELETE("{path1}/{path2}")
+    Call<String> delete(@Path("path1") String path1, @Path("path2") String path2, @QueryMap(encoded = true) Map<String, String> query);
+
+    @FormUrlEncoded
+    @POST("{path1}/{path2}")
+    Call<String> post(@Path("path1") String path1, @Path("path2") String path2, @FieldMap(encoded = true) Map<String, String> body);
+
+    @FormUrlEncoded
+    @PUT("{path1}/{path2}")
+    Call<String> put(@Path("path1") String path1, @Path("path2") String path2, @FieldMap(encoded = true) Map<String, String> body);
+
+    @Multipart
+    @POST("{path1}/{path2}")
+    Call<String> postMultiPart(@Path("path1") String path1, @Path("path2") String path2, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> files);
+
+    @Multipart
+    @PUT("{path1}/{path2}")
+    Call<String> putMultiPart(@Path("path1") String path1, @Path("path2") String path2, @PartMap Map<String, RequestBody> body, @Part List<MultipartBody.Part> files);
+
+    // three path----------------------------------------------------------------------------------------------
     @GET("{path1}/{path2}/{path3}")
     Call<String> get(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @QueryMap(encoded = true) Map<String, String> query);
 
