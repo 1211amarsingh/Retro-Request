@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
 //        model.breakInFlag = "All";
 //
 //        request.setObject(model);
-        request.putQuery("user_id", "1234");    //for put query and body for send data use as key value pair -> &user_id=1234
+        request.putQuery("user_id", "dd %h");    //for put query and body for send data use as key value pair -> &user_id=1234
         request.addHeader("Authorization", "JWT eyJhb");    // optional if required
         request.setRequestMethod(RetroRequest.GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
         request.setTag(PINCODE);    //for use multiple request in same activity  set unique tag

@@ -56,7 +56,7 @@ public interface ApiServiceInterface {
 
     @FormUrlEncoded
     @POST("{path1}/{path2}/{path3}")
-    Call<String> post(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @FieldMap(encoded = true) Map<String, String> body);
+    Call<String> post(@Path("path1") String path1, @Path("path2") String path2, @Path("path3") String path3, @FieldMap Map<String, String> body);//(encoded = true)
 
     @FormUrlEncoded
     @PUT("{path1}/{path2}/{path3}")
