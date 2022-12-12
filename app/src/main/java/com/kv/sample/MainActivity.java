@@ -36,10 +36,12 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
     //demo url = URL:- (GET) http://postalpincode.in/api/pincode/110001?user_id=1234
     private void serverRequestForGetCity(String pin) {
         RetroRequest request = new RetroRequest(context, this);
-        request.setBaseUrl(getBaseUrl());   //set base_url of api example- "https://github.com/",  "https://github.com:1030/"
-        request.setPath1("api");            //set path
-        request.setPath2("pincode");
-        request.setPath3(pin);
+        request.setBaseUrl(" http://192.168.189.215:3004/");   //getBaseUrl()//set base_url of api example- "https://github.com/",  "https://github.com:1030/"
+        request.setPath1("v.1.0");            //set path
+        request.setPath2("coupon");
+        request.setPath3("add");
+        request.putQuery("code", "20% OFF on all product");
+
 //        request.setPath4("master");                                      // optional if required
 //        Model model = new Model();
 //        model.breakInFlag = "All";
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
 //        request.setObject(model);
         request.putQuery("user_id", "dd %h");    //for put query and body for send data use as key value pair -> &user_id=1234
         request.addHeader("Authorization", "JWT eyJhb");    // optional if required
-        request.setRequestMethod(RetroRequest.GET);   //set the type of api {GET, POST, DELETE, PUT} Default GET
+        request.setRequestMethod(RetroRequest.POST);   //set the type of api {GET, POST, DELETE, PUT} Default GET
         request.setTag(PINCODE);    //for use multiple request in same activity  set unique tag
         request.setShowRetrySnack(true);        //for show Retry Snackbar on No Internet Connection.                Default false
         request.setShowToast(true);             //for show Toast on Failure, No Internet                            Default true
@@ -58,13 +60,13 @@ public class MainActivity extends AppCompatActivity implements ResponseDelegate 
     @Override
     public void onSuccess(int tag,int code, String response) {
         if (tag == PINCODE) {
-            PostOffice postOffice = new Gson().fromJson(response, PostOffice.class);
-            if (postOffice.getStatus().equals("Success")) {
-                //success
-                tv_result.setText(gson.toJson(postOffice.getPostOffice()));
-            } else {
-                Utils.showToast(context, postOffice.getMessage());
-            }
+//            PostOffice postOffice = new Gson().fromJson(response, PostOffice.class);
+//            if (postOffice.getStatus().equals("Success")) {
+//                //success
+//                tv_result.setText(gson.toJson(postOffice.getPostOffice()));
+//            } else {
+//                Utils.showToast(context, postOffice.getMessage());
+//            }
         }
     }
 

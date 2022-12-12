@@ -54,8 +54,6 @@ public class RetroRequest extends DataModel {
     public RetroRequest(Context context, ResponseDelegate delegate) {
         super(delegate);
         this.context = context;
-        setShowLog((Boolean) getBuildConfigValue(context, "DEBUG"));
-        Log.w("DEBUG MODE", isShowLog() + "");
     }
 
     public void execute(boolean progressbar) {
