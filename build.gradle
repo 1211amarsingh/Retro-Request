@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'maven-publish'
 
 buildscript {
     repositories {
@@ -24,4 +25,18 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.company'
+            artifactId = 'sample'
+            version = "0.9-SNAPSHOT"
+
+            pom {
+                description = 'A description of my library'
+            }
+        }
+    }
 }
